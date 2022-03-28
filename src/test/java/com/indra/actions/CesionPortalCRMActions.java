@@ -8,8 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-
 public class CesionPortalCRMActions extends CesionPortalCRMPage {
     public CesionPortalCRMActions(WebDriver driver) {
         super(driver);
