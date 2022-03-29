@@ -12,5 +12,5 @@ import org.junit.runner.RunWith;
         ,snippets = SnippetType.CAMELCASE
         ,tags="@Reconexion"
 )
-        public class SanityRunners {
+public class SanityRunners {
 }

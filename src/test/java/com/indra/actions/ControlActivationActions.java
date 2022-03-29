@@ -92,11 +92,14 @@ public class ControlActivationActions extends ControlActivationPage {
     }
 
     public void consultSingleScreen(String msisdn){
+        getDriver().switchTo().defaultContent();
+        getConsult().click();
         getConsultPos().click();
         getConsultIntegral().click();
         getCosultaPantallaUnica().click();
-        WebElement iframe = getDriver().findElement(By.xpath("//*[@id='iframe']"));
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
         getDriver().switchTo().frame(iframe);
+        //enter("3016875893").into(getMsisdn2());
         enter(msisdn).into(getMsisdn2());
         getSearchButton().click();
         getGeneralCustomerInformation().waitUntilPresent();
