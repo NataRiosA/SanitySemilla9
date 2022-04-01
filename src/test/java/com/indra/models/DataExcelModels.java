@@ -42,6 +42,14 @@ public class DataExcelModels{
     String msisdnPostpago;
     String msiPostpago;
 
+    String CedulaClientePortInPos;
+    String msisdnPorInPos;
+    String msiPortInPos;
+
+    String CedulaClientePortInPre;
+    String msisdnPorInPre;
+    String msiPortInPre;
+
     String msisdnAvanger;
     String msiAvanger;
     String CedulaClienteAvanger;
@@ -287,19 +295,19 @@ public class DataExcelModels{
 
     public String getMsisdnAvanger() {
         fileXLSX.readFileExcel();
-        msisdnAvanger = fileXLSX.excelArray.get(13).get(2);
+        msisdnAvanger = fileXLSX.excelArray.get(11).get(2);
         return msisdnAvanger;
     }
 
     public String getMsiAvanger() {
         fileXLSX.readFileExcel();
-        msiAvanger = fileXLSX.excelArray.get(13).get(3);
+        msiAvanger = fileXLSX.excelArray.get(11).get(3);
         return msiAvanger;
     }
 
     public String getCedulaClienteAvanger() {
         fileXLSX.readFileExcel();
-        CedulaClienteAvanger = fileXLSX.excelArray.get(13).get(1);
+        CedulaClienteAvanger = fileXLSX.excelArray.get(11).get(1);
         return CedulaClienteAvanger;
     }
 
@@ -373,5 +381,42 @@ public class DataExcelModels{
         fileXLSX.readFileExcel();
         passwordSSH= fileXLSX.excelArray.get(4).get(6);
         return passwordSSH;
+    }
+
+
+    public String getCedulaClientePortInPos() {
+        fileXLSX.readFileExcel();
+        CedulaClientePortInPos= fileXLSX.excelArray.get(12).get(1);
+        return CedulaClientePortInPos;
+    }
+
+    public String getMsisdnPorInPos() {
+        fileXLSX.readFileExcel();
+        msisdnPorInPos= fileXLSX.excelArray.get(12).get(2);
+        return msisdnPorInPos;
+    }
+
+    public String getMsiPortInPos() {
+        fileXLSX.readFileExcel();
+        msiPortInPos= fileXLSX.excelArray.get(12).get(3);
+        return msiPortInPos;
+    }
+
+    public String getCedulaClientePortInPre() {
+        fileXLSX.readFileExcel();
+        CedulaClientePortInPre= fileXLSX.excelArray.get(13).get(1);
+        return CedulaClientePortInPre;
+    }
+
+    public String getMsisdnPorInPre() {
+        fileXLSX.readFileExcel();
+        msisdnPorInPre= fileXLSX.excelArray.get(13).get(1);
+        return msisdnPorInPre;
+    }
+
+    public String getMsiPortInPre() {
+        fileXLSX.readFileExcel();
+        msiPortInPre= fileXLSX.excelArray.get(13).get(1);
+        return msiPortInPre;
     }
 }

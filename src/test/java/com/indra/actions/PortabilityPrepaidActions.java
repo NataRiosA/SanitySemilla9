@@ -21,21 +21,21 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
     DatabasePortInActions databasePortInActions = new DatabasePortInActions();
     UninstallCBSServicesActions servicesActions = new UninstallCBSServicesActions();
 
-    public void makePortabilityRequestAndDB(String msisdnPort) throws SQLException {
-        validateLinesBd();
+    public void makePortabilityRequestAndDB(String msisdnPort, String msiPort) throws SQLException {
+        validateLinesBd(msisdnPort,msiPort);
         consultSingleScreen(msisdnPort);
-        validateTransctionBd();
+        validateTransctionBd(msisdnPort);
 
         switchToDefaultContent();
         initialRuteRequestPortability();
         makePortabilityRequest(msisdnPort);
 
-        validateTransctionBd();
+        validateTransctionBd(msisdnPort);
         aceptNitBd(msisdnPort);
-        validateTransctionBd();
+        validateTransctionBd(msisdnPort);
 
         MatcherAssert.assertThat("el status es PIN_REQUEST_ACEPTADO",
-                validateTransctionBd(),Matchers.equalTo("PIN_REQUEST_ACEPTADO"));
+                validateTransctionBd(msisdnPort),Matchers.equalTo("PIN_REQUEST_ACEPTADO"));
        // consultNipBd();
     }
 
@@ -249,17 +249,17 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
     }
 
 
-    public void validateLinesBd() throws SQLException {
-        databasePortInActions.cleanLinesMsisdn(dataExcelModels.getMsisdnPortPrepay());
-        databasePortInActions.cleanLinesMsi(dataExcelModels.getMsiPort());
+    public void validateLinesBd(String msisdn,String msi) throws SQLException {
+        databasePortInActions.cleanLinesMsisdn(msisdn);
+        databasePortInActions.cleanLinesMsi(msi);
     }
 
-    public String validateTransctionBd() throws SQLException {
-        return databasePortInActions.executePortabilityTransactionStatus(dataExcelModels.getMsisdnPortPrepay());
+    public String validateTransctionBd(String msisdn) throws SQLException {
+        return databasePortInActions.executePortabilityTransactionStatus(msisdn);
     }
 
-    public void aceptNitBd(String msisdnPorting) throws SQLException {
-        databasePortInActions.executePortabilityNip(msisdnPorting);
+    public void aceptNitBd(String msisdn) throws SQLException {
+        databasePortInActions.executePortabilityNip(msisdn);
     }
 
     public int consultNipBd(String nip) throws SQLException {
@@ -267,24 +267,25 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
         //System.out.println(databasePortInActions.executeSelectNip(nip).length());
         return resultNip.length();
     }
-    public void executePortabilityReceptBd() throws SQLException {
-        databasePortInActions.executePortabilityRecept(dataExcelModels.getMsisdnPort());
+
+    public void executePortabilityReceptBd(String msisdn) throws SQLException {
+        databasePortInActions.executePortabilityRecept(msisdn);
     }
 
-    public void executeUpdatePortIdBd() throws SQLException {
-        databasePortInActions.executeUpdatePortId(portId(), dataExcelModels.getMsisdnPort());
+    public void executeUpdatePortIdBd(String msisdn) throws SQLException {
+        databasePortInActions.executeUpdatePortId(portId(msisdn), msisdn);
     }
 
-    public void executePortIdBd() throws SQLException {
-        databasePortInActions.executePortId(dataExcelModels.getPortId());
+    public void executePortIdBd(String msisdn) throws SQLException {
+        databasePortInActions.executePortId(portId(msisdn));
     }
 
-    public List<String> executePortabilityTransactionBd() throws SQLException {
-        return databasePortInActions.executePortabilityTransaction(dataExcelModels.getMsisdnPort());
+    public List<String> executePortabilityTransactionBd(String msisdn) throws SQLException {
+        return databasePortInActions.executePortabilityTransaction(msisdn);
     }
 
-    public void executeWindowPortabilityBd() throws SQLException {
-        databasePortInActions.executeWindowPortability(dataExcelModels.getMsisdnPort());
+    public void executeWindowPortabilityBd(String msisdn) throws SQLException {
+        databasePortInActions.executeWindowPortability(msisdn);
     }
 
     public void consultSingleScreen(String msisdn){
@@ -347,12 +348,12 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
         getBtnSolicitar().click();
     }
 
-    public void portabilityRequestSoapUI() throws SQLException {
-        String response = servicesActions.portabilidad(executePortabilityTransactionBd().get(0),
-                executePortabilityTransactionBd().get(1),
-                executePortabilityTransactionBd().get(2),
-                executePortabilityTransactionBd().get(3),
-                executePortabilityTransactionBd().get(4),
+    public void portabilityRequestSoapUI(String msisdn) throws SQLException {
+        String response = servicesActions.portabilidad(executePortabilityTransactionBd(msisdn).get(0),
+                executePortabilityTransactionBd(msisdn).get(1),
+                executePortabilityTransactionBd(msisdn).get(2),
+                executePortabilityTransactionBd(msisdn).get(3),
+                executePortabilityTransactionBd(msisdn).get(4),
                 dataExcelModels.getPortabilitySoapUI());
 
 
@@ -363,7 +364,7 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
 
     public void validateLineTemporal(String msisdn) throws SQLException {
         consultSingleScreen1(msisdn);
-        validateTransctionBd();
+        validateTransctionBd(msisdn);
     }
 
     public void consultSingleScreen1(String msisdn){
@@ -396,17 +397,17 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
                 hrl.getText(),Matchers.containsString("Operation is successful") );
     }
 
-    public void preWindow() throws SQLException {
-        executePortabilityReceptBd();
-        validateTransctionBd();
-        executePortIdBd();
-        executeUpdatePortIdBd();
-        executePortIdBd();
+    public void preWindow(String msisdn) throws SQLException {
+        executePortabilityReceptBd(msisdn);
+        validateTransctionBd(msisdn);
+        executePortIdBd(msisdn);
+        executeUpdatePortIdBd(msisdn);
+        executePortIdBd(msisdn);
     }
 
     public void validateLineTemporal1(String msisdn) throws SQLException {
         consultSingleScreen2(msisdn);
-        validateTransctionBd();
+        validateTransctionBd(msisdn);
     }
 
     public void consultSingleScreen2(String msisdn){
@@ -435,8 +436,8 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
                 plan.getText(),Matchers.containsString("Operation is successful") );
     }
 
-    public String portId(){
-        String nip = dataExcelModels.getMsisdnPort().substring(5,10);
+    public String portId(String msisdn){
+        String nip = msisdn.substring(5,10);
         // logica si esta sumar 1 al nip
         // nip = String.valueOf(Integer.valueOf(nip) + 1);
         // repertir consulta
@@ -444,10 +445,10 @@ public class PortabilityPrepaidActions extends PortabilityPrepaidPage {
         return portId;
     }
 
-    public void window() throws SQLException {
-        executeWindowPortabilityBd();
-        portabilityRequestSoapUI();
-        executeWindowPortabilityBd();
+    public void window(String msisdn) throws SQLException {
+        executeWindowPortabilityBd(msisdn);
+        portabilityRequestSoapUI(msisdn);
+        executeWindowPortabilityBd(msisdn);
     }
 
     public String nip(String nip) throws SQLException {
