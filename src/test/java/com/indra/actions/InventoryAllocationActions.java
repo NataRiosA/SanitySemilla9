@@ -72,10 +72,10 @@ public class InventoryAllocationActions extends InventoryAllocationPage {
         MatcherAssert.assertThat("esta presente la carga masiva",
                 getTableCargaMasiva().isPresent(), Matchers.is(true));
         getBtnCargaMasiva().click();
-        Thread.sleep(1000);
+        waitABit(2000);
         WebElement btnCargarArchivo = getDriver().findElement(By.id("formUpload:upload:file"));
-        btnCargarArchivo.sendKeys("C:\\SanitySemilla9\\src\\test\\resources\\config_data\\Inventario.csv");
-        Thread.sleep(3000);
+        btnCargarArchivo.sendKeys("C:\\Users\\nriosa\\Desktop\\SanitySemillas\\SanitySemilla9\\src\\test\\resources\\config_data\\Inventario.csv");
+        waitABit(3000);
         getBtnAccept().click();
         getBtnAcceptInventory().click();
         MatcherAssert.assertThat("Se presenta el message de cargue de inventario"

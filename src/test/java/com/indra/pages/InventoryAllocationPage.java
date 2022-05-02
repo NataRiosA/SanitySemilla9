@@ -51,7 +51,7 @@ public class InventoryAllocationPage extends PageObject {
     @FindBy(id = "formUpload:upload:file")
     WebElement btnCargarArchivo;
 
-    @FindBy(xpath = "//*[@id='formUpload:j_id_jsp_1482417417_216']")
+    @FindBy(xpath = "//*[@id='formUpload:j_id_jsp_1482417417_216']") //(//input[@class='boton1'])[2]
     WebElementFacade btnAccept;
 
     @FindBy(id = "form1:j_id_jsp_1482417417_167")

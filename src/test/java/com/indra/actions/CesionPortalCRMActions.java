@@ -26,7 +26,7 @@ public class CesionPortalCRMActions extends CesionPortalCRMPage {
     public void executeContractAssignment(String phonenumber, String idClient) throws InterruptedException, AWTException, JSchException {
         switchToIframe();
         writePhoneNumber(phonenumber);
-        waitABit(1000);
+        waitABit(2000);
         getClaveAsesor().click();
         getVendedor().waitUntilPresent();
         selectAnnualRenewal();

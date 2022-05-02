@@ -27,7 +27,7 @@ public class CambioPrePosActions extends CambioPrePosPage {
     public void executeContractAssignment(String phonenumber, String vendor) throws InterruptedException, AWTException, JSchException {
         switchToIframe();
         writePhoneNumber(phonenumber);
-        waitABit(65000);
+        waitABit(70000);
         System.out.println("ya pasaron 50 sg");
         getBtnClave().click();
         adviserKeyGeneration();

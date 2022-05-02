@@ -76,24 +76,24 @@ Feature: Sanity limpieza y aprovisionamiento de recursos
     When Se ejecuta la reconexion de la linea
     Then Se deberia ver en pantalla unica la linea en estado reconectada
 
-  @PosPayPortability
-  Scenario: se requiere realizar una portabilidad pospago
-    Given Se ingresa al portal CRM para activacion
-    When se hace la solicitud de portabilidad
-    And se realiza la activacion de la linea a portar
-    And Se deberia ver en pantalla unica la linea en estado activado
-    And se ejecutan los procedimientos preventana
-    And se crea la ventana de portacion en SoapUi
-    And se realiza la ejecucion de la shell de portacion
-    Then Se deberia ver en pantalla unica la linea en estado activado la linea portada
-
-  @PrepayPortability
-  Scenario: se requiere realizar la reconexion de una linea
-    Given Se ingresa al portal CRM para activacion
-    When se hace la solicitud de portabilidad prepago
-    And se realiza la activacion de la linea portada
-    Then Se deberia ver en pantalla unica la linea prepago en estado activado
-    And se ejecutan los procedimientos preventana prepago
-    And se crea la ventana de portacion en SoapUi prepago
-    And se realiza la ejecucion de la shell de portacion
-    Then Se deberia ver en pantalla unica la linea en estado activado la linea prepago portada
+#  @PosPayPortability
+#  Scenario: se requiere realizar una portabilidad pospago
+#    Given Se ingresa al portal CRM para activacion
+#    When se hace la solicitud de portabilidad
+#    And se realiza la activacion de la linea a portar
+#    And Se deberia ver en pantalla unica la linea en estado activado
+#    And se ejecutan los procedimientos preventana
+#    And se crea la ventana de portacion en SoapUi
+#    And se realiza la ejecucion de la shell de portacion
+#    Then Se deberia ver en pantalla unica la linea en estado activado la linea portada
+#
+#  @PrepayPortability
+#  Scenario: se requiere realizar la reconexion de una linea
+#    Given Se ingresa al portal CRM para activacion
+#    When se hace la solicitud de portabilidad prepago
+#    And se realiza la activacion de la linea portada
+#    Then Se deberia ver en pantalla unica la linea prepago en estado activado
+#    And se ejecutan los procedimientos preventana prepago
+#    And se crea la ventana de portacion en SoapUi prepago
+#    And se realiza la ejecucion de la shell de portacion
+#    Then Se deberia ver en pantalla unica la linea en estado activado la linea prepago portada

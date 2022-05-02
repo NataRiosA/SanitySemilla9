@@ -65,7 +65,7 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         enter("3222345678").into(getPhone());
         getContinueActivationDemo().click();
         getConfirm().click();
-        waitABit(5000);
+        waitABit(10000);
         getActivationDetails().waitUntilPresent();
 
         WebElement title = getDriver().findElement(By.className("tituloPagina"));

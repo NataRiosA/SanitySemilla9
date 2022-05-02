@@ -27,6 +27,7 @@ public class CesionPortalPosCRMActions extends CesionPortalCRMPage {
 
     public void executeContractAssignment(String phonenumber, String idClient,String planNumber) throws InterruptedException, AWTException, JSchException {
         switchToIframe();
+        waitABit(2000);
         writePhoneNumber(phonenumber);
         waitABit(1000);
         getClaveAsesor().click();
@@ -56,7 +57,7 @@ public class CesionPortalPosCRMActions extends CesionPortalCRMPage {
         btnChangeContractClick();
         waitABit(1000);
         alertAcept();
-        waitABit(30000);
+        waitABit(50000);
         getMensajes().waitUntilPresent();
         System.out.println(getMensajes().getText());
     }
