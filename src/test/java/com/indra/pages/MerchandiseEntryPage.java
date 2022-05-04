@@ -18,7 +18,7 @@ public class MerchandiseEntryPage extends PageObject {
     @FindBy(id = "formMenu:j_id26")
     WebElementFacade MerchandiseEntry;
 
-    @FindBy(id = "formMenu:j_id54:anchor")
+    @FindBy(id = "formMenu:j_id53:anchor")
     WebElementFacade massMerchandiseEntry;
 
     @FindBy(id = "form1:idCanal")
