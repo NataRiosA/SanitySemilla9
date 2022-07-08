@@ -76,6 +76,18 @@ Feature: Sanity limpieza y aprovisionamiento de recursos
     When Se ejecuta la reconexion de la linea
     Then Se deberia ver en pantalla unica la linea en estado reconectada
 
+  @portalCesionNitaNit
+  Scenario: se requiere realizar una cesion de contrato nit a nit
+    Given Se ingresa al portal CRM para activacion
+    When Se hace la cesion de contrato de una linea nit a nit
+    Then Se deberia ver en pantalla unica la linea cedida con nit
+
+  @portalNintendoNit
+  Scenario: se requiere realizar una activacion nintendo con nit
+    Given Se ingresa al portal CRM para activacion
+    When Se hace activacion de una linea nintendo con nit
+    Then Se deberia ver en pantalla unica la linea activa nintendo con nit
+
 #  @PosPayPortability
 #  Scenario: se requiere realizar una portabilidad pospago
 #    Given Se ingresa al portal CRM para activacion
