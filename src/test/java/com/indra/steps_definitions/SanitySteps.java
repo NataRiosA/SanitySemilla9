@@ -196,7 +196,7 @@ public class SanitySteps{
 
         //legalizacion del pedido
         pagoEquiposActions.rutaInicial();
-        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClienteAvanger(),dataExcelModels.getMsisdnAvanger())
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClienteAvanger(),dataExcelModels.getMsisdnAvanger());
     }
 
     //-----------<Noveno escenario>----------------
