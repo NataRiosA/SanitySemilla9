@@ -18,7 +18,7 @@ public class InventoryAllocationPage extends PageObject {
     @FindBy(id = "formMenu:j_id21:anchor")
     WebElementFacade inventoryAllocation;
 
-    @FindBy(id = "formMenu:j_id31:anchor")
+    @FindBy (xpath = "(//div[contains(.,'Asignaci\u00F3n de Inventario')])[8]")//(id = "formMenu:j_id31:anchor")
     WebElementFacade subInventoryAllocation;
 
     @FindBy(xpath = "(//table[@class='mystyle']/tbody/tr/td[2]/span)[1]")

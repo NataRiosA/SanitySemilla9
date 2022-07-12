@@ -22,7 +22,7 @@ public class InventoryAllocationActions extends InventoryAllocationPage {
 
         WebElement inventory = getDriver().findElement(By.id("formMenu:j_id13_span"));
         actions.moveToElement(inventory).build().perform();
-        WebElement inventoryAllocation = getDriver().findElement(By.id("formMenu:j_id15"));
+        WebElement inventoryAllocation = getDriver().findElement(By.xpath("(//span[contains(.,'Asignaci\u00F3n de Inventario')])[1]"));//(By.id("formMenu:j_id15"));
         actions.moveToElement(inventoryAllocation).build().perform();
         getSubInventoryAllocation().click();
         getDriver().navigate().refresh();
@@ -74,7 +74,7 @@ public class InventoryAllocationActions extends InventoryAllocationPage {
         getBtnCargaMasiva().click();
         waitABit(2000);
         WebElement btnCargarArchivo = getDriver().findElement(By.id("formUpload:upload:file"));
-        btnCargarArchivo.sendKeys("C:\\Users\\nriosa\\Desktop\\SanitySemillas\\SanitySemilla9\\src\\test\\resources\\config_data\\Inventario.csv");
+        btnCargarArchivo.sendKeys("C:\\SanitySemilla9\\src\\test\\resources\\config_data\\Inventario.csv");
         waitABit(3000);
         getBtnAccept().click();
         getBtnAcceptInventory().click();

@@ -21,7 +21,7 @@ public class MerchandiseEntryAction extends MerchandiseEntryPage {
         Actions actions = new Actions(getDriver());
         WebElement we = getDriver().findElement(By.id("formMenu:j_id13_span"));
         actions.moveToElement(we).build().perform();
-        WebElement a = getDriver().findElement(By.id("formMenu:j_id20"));
+        WebElement a = getDriver().findElement(By.xpath("//span[contains(.,'Entrada de Mercancia')]"));//("formMenu:j_id20"));
         actions.moveToElement(a).build().perform();
         getMassMerchandiseEntry().click();
     }
@@ -51,7 +51,7 @@ public class MerchandiseEntryAction extends MerchandiseEntryPage {
         getBulkUploadItems().click();
         Actions actions = new Actions(getDriver());
         WebElement we = getDriver().findElement(By.xpath("//input[contains(@id,'formload:uploadFile:file')]"));
-        we.sendKeys("C:\\Users\\nriosa\\Desktop\\SanitySemillas\\SanitySemilla9\\src\\test\\resources\\config_data\\Mercanncia.csv");
+        we.sendKeys("C:\\SanitySemilla9\\src\\test\\resources\\config_data\\Mercanncia.csv");
         //actions.moveToElement(we).build().perform();
         getUploadFile2().click();
         //compareM();
