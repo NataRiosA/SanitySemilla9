@@ -59,6 +59,20 @@ public class PagoEquiposPage extends PageObject {
     @FindBy (xpath = "(//li[@class='infomsg'])[2]")
     WebElementFacade billPaymentmessage;
 
+    @FindBy(xpath = "//*[@id='Order:identificacionField:tipoId']")
+    WebElementFacade typeNit;
+
+    @FindBy(xpath = "/html/body/div[1]/form/div[1]/div/table/tbody/tr[2]/td/table/tbody/tr/td[1]/div/div/span[1]/select/option[2]")
+    WebElementFacade nit;
+
+    public WebElementFacade getTypeNit() {
+        return typeNit;
+    }
+
+    public WebElementFacade getNit() {
+        return nit;
+    }
+
     public WebElementFacade getBillPaymentmessage() {
         return billPaymentmessage;
     }

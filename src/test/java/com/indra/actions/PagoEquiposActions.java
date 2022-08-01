@@ -5,6 +5,7 @@ import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
 public class PagoEquiposActions extends PagoEquiposPage {
 
@@ -31,8 +32,66 @@ public class PagoEquiposActions extends PagoEquiposPage {
 
     }
 
+    public void pagarEquipoNit(String identificacion, String numeroCelular){
+        switchToFrame();
+        getIdentificacion().waitUntilPresent();
+        getTypeNit().click();
+        getNit().click();
+        ingresaNumeroIdentificacion(identificacion);
+        clickConsultar();
+        waitABit(200);
+
+        switchToDefaultContent();
+        WebElement toque = getDriver().findElement(By.xpath("/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div/div/div/div[1]/div[3]/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div/div/div/table/tbody/tr/td[1]/form/div/div/div/div/div[2]"));
+        toque.click();
+        switchToFrame();
+
+        takeScreenShot(10);
+
+        getTextoTelefono().waitUntilVisible();
+        if(getTextoTelefono().getText().equals(numeroCelular)) {
+
+            switchToDefaultContent();
+
+            scrollDown("10");
+            switchToFrame();
+
+            clickEnElTextoTelefeno();
+
+            getRadioButtomEfectivo().waitUntilPresent();
+            scrollDown("840");
+            switchToDefaultContent();
+            scrollDown("840");
+            switchToFrame();
+            seleccionaRadioButtonEfectivo();
+            ingresarValorEquipo();
+            waitABit(5000);
+            clickBotonPagar();
+            clickBotonPagoTotal();
+            getBillPaymentmessage().waitUntilPresent();
+
+            System.out.println("***********************************************************************************");
+            System.out.println(getMessages().getText());
+            System.out.println("***********************************************************************************");
+
+            takeScreenShot(10);
+
+            MatcherAssert.assertThat("la factura se paga de manera correcta"
+                    , getMessages().getText()
+                    , Matchers.containsString("Factura Electronica generada correctamente"));
+
+
+
+        }
+        else{
+            System.out.println("El numero de telefono"+numeroCelular+"no coincide con el que se debe pagar");
+        }
+    }
+
+
     public void pagarEquipo(String identificacion, String numeroCelular){
         switchToFrame();
+
         getIdentificacion().waitUntilPresent();
         ingresaNumeroIdentificacion(identificacion);
         clickConsultar();
