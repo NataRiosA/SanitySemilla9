@@ -1,6 +1,7 @@
 package com.indra.actions;
 
 import com.indra.pages.SuspentionPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -9,6 +10,14 @@ import org.openqa.selenium.support.ui.Select;
 public class SuspentionActions extends SuspentionPage {
         public SuspentionActions(WebDriver driver) {
         super(driver);
+    }
+
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
     }
 
     public void initialRute(){
@@ -29,6 +38,8 @@ public class SuspentionActions extends SuspentionPage {
        //btnexecuteChangeClick();
        waitABit(3000);
 
+       takeScreenShot(10);
+
        Alert alert = getDriver().switchTo().alert();
         System.out.println(alert.getText());
         alert.accept();
@@ -37,6 +48,9 @@ public class SuspentionActions extends SuspentionPage {
        switchToIframe();
        waitABit(3000);
        getMessageOfResults().waitUntilPresent();
+
+       takeScreenShot(10);
+
        MatcherAssert.assertThat("se presenta el mensaje",getMessageOfResults().isPresent(), Matchers.is(true));
 
     }
@@ -101,6 +115,8 @@ public class SuspentionActions extends SuspentionPage {
         getLinkDetails().click();
         waitABit(1000);
 
+        takeScreenShot(10);
+
         if(getPopUpDetails().isPresent()){
 
             WebElement sms = getDriver().findElement(By.id("j_id135:idDataTableProductosSiebel:0:j_id311"));
@@ -116,6 +132,8 @@ public class SuspentionActions extends SuspentionPage {
         }
 
         MatcherAssert.assertThat("la linea esta activa",cont,Matchers.is(1) );
+
+        takeScreenShot(10);
 
         getClosePopUp().click();
         getBtnClean().click();
@@ -138,6 +156,8 @@ public class SuspentionActions extends SuspentionPage {
         getLinkDetails().click();
         waitABit(1000);
 
+        takeScreenShot(10);
+
         if(getPopUpDetails().isPresent()){
 
             WebElement sms = getDriver().findElement(By.id("j_id135:idDataTableProductosSiebel:0:j_id311"));
@@ -153,6 +173,9 @@ public class SuspentionActions extends SuspentionPage {
 
         MatcherAssert.assertThat("la linea esta suspendida",
                 cont,Matchers.is(1) );
+
+        takeScreenShot(10);
+
         getClosePopUp().click();
         getBtnClean().click();
 

@@ -3,12 +3,14 @@ package com.indra.actions;
 import com.indra.models.DataExcelModels;
 import com.indra.pages.PortabilityPostActivationPage;
 import com.jcraft.jsch.JSchException;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,6 +21,14 @@ public class PortabilityPostActivationActions extends PortabilityPostActivationP
     DatabasePortInActions databasePortInActions = new DatabasePortInActions();
     UninstallCBSServicesActions servicesActions = new UninstallCBSServicesActions();
     SshConnetions sshConnetions = new SshConnetions();
+
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
+    }
 
     public PortabilityPostActivationActions(WebDriver driver) {
         super(driver);
@@ -72,6 +82,8 @@ public class PortabilityPostActivationActions extends PortabilityPostActivationP
         getDriver().switchTo().frame(iframe);
         enter(msisdnPort).into(getInputMsisdn());
         getBtnSolicitar().click();
+
+        takeScreenShot(100);
         WebElement soliNip = getDriver().findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/table/tbody/tr[2]/td/div/div[2]/table[3]/tbody/tr/td/ul/li/span"));
 //        MatcherAssert.assertThat("solicitud nip exitosa",
 //                soliNip.getText(),Matchers.containsString("Las solicitudes se procesaron") );
@@ -308,9 +320,16 @@ public class PortabilityPostActivationActions extends PortabilityPostActivationP
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,520)");
 
+        Actions actions = new Actions(getDriver());
+        WebElement leave = getDriver().findElement(By.xpath("//span[text()='ACTIVACION']"));
+        actions.moveToElement(leave).build().perform();
+
         getHlrImpre().click();
         waitABit(2000);
+
         getHlr().click();
+
+        js.executeScript("window.scrollBy(0,820)");
 
         WebElement hrl = getDriver().findElement(By.xpath("//*[@id='j_id461:j_id465']"));
         MatcherAssert.assertThat("el hrl es ",

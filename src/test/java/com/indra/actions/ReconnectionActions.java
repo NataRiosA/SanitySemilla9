@@ -1,6 +1,7 @@
 package com.indra.actions;
 
 import com.indra.models.ReconnectionPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -9,6 +10,14 @@ import org.openqa.selenium.support.ui.Select;
 public class ReconnectionActions extends ReconnectionPage {
         public ReconnectionActions(WebDriver driver) {
         super(driver);
+    }
+
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
     }
 
     public void initialRute(){
@@ -29,6 +38,8 @@ public class ReconnectionActions extends ReconnectionPage {
        //btnexecuteChangeClick();
        //waitABit(3000);
 
+        takeScreenShot(10);
+
        Alert alert = getDriver().switchTo().alert();
         alert.accept();
         getDriver().switchTo().defaultContent();
@@ -36,6 +47,9 @@ public class ReconnectionActions extends ReconnectionPage {
 
        getMessageOfResults().waitUntilPresent();
        waitABit(3000);
+
+       takeScreenShot(10);
+
        MatcherAssert.assertThat("se presenta el mensaje",getMessageOfResults().isPresent(), Matchers.is(true));
 
     }
@@ -100,6 +114,8 @@ public class ReconnectionActions extends ReconnectionPage {
         getLinkDetails().click();
         waitABit(1000);
 
+        takeScreenShot(10);
+
         if(getPopUpDetails().isPresent()){
 
             WebElement sms = getDriver().findElement(By.id("j_id135:idDataTableProductosSiebel:0:j_id311"));
@@ -115,6 +131,9 @@ public class ReconnectionActions extends ReconnectionPage {
 
         MatcherAssert.assertThat("la linea esta activa",
                 cont,Matchers.is(1) );
+
+        takeScreenShot(10);
+
         getClosePopUp().click();
         getBtnClean().click();
 
@@ -136,6 +155,8 @@ public class ReconnectionActions extends ReconnectionPage {
         getLinkDetails().click();
         waitABit(1000);
 
+        takeScreenShot(10);
+
         if(getPopUpDetails().isPresent()){
 
             WebElement sms = getDriver().findElement(By.id("j_id135:idDataTableProductosSiebel:0:j_id311"));
@@ -152,6 +173,9 @@ public class ReconnectionActions extends ReconnectionPage {
 
         MatcherAssert.assertThat("la linea esta Suspendida",
                 cont,Matchers.is(1) );
+
+        takeScreenShot(10);
+
         getClosePopUp().click();
         getBtnClean().click();
 

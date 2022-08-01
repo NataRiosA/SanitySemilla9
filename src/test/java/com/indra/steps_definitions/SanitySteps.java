@@ -157,9 +157,6 @@ public class SanitySteps{
     public void seDeberiaVerEnPantallaUnicaLaLineaCedidaPre() {
         prepaidActivationActions.consultSingleScreen2(dataExcelModels.getMsisdnPrepago());
 
-        //legalizacion del pedido
-        pagoEquiposActions.rutaInicial();
-        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePostpago(),dataExcelModels.getMsisdnPrepago());
     }
 
     //-----------<Septimo escenario>----------------
@@ -174,10 +171,7 @@ public class SanitySteps{
     public void seDeberiaVerEnPantallaUnicaLaLineaCedidaPos() {
         prepaidActivationActions.consultSingleScreen2(dataExcelModels.getMsisdnPostpago());
 
-        //legalizacion del pedido
-        pagoEquiposActions.rutaInicial();
-        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePrepago(),dataExcelModels.getMsisdnPostpago());
-    }
+           }
 
     //-----------<Octavo escenario>----------------
 

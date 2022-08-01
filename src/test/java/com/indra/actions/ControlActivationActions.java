@@ -2,6 +2,7 @@ package com.indra.actions;
 
 import com.indra.pages.ControlActivationPage;
 import com.indra.pages.PrepaidActivationPage;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -9,11 +10,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class ControlActivationActions extends ControlActivationPage {
 
     public ControlActivationActions(WebDriver driver) {
         super(driver);
+    }
+
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
     }
 
     public void initialRute(){
@@ -26,6 +36,8 @@ public class ControlActivationActions extends ControlActivationPage {
         getDropdownActivator().waitUntilVisible();
         getDropdownActivator().click();
         getControl().click();
+
+        takeScreenShot(10);
     }
 
     public void customerInformation(String vendedor,String cliente)  {
@@ -36,6 +48,9 @@ public class ControlActivationActions extends ControlActivationPage {
         //enter("667299000").into(getDocumentCC());
         enter(cliente).into(getDocumentCC());
         enter("2000").into(getDocumentExpedicion());
+
+        takeScreenShot(10);
+
         getBtnContinue().click();
     }
 
@@ -48,20 +63,30 @@ public class ControlActivationActions extends ControlActivationPage {
         enter(msisdn).into(getMsisdn());
         getTypeSale().click();
         getJustSim().click();
+
+
+
         getPlan().waitUntilClickable();
         getPlan().click();
         getPlan740().click();
         getDriver().switchTo().defaultContent();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
+
+        Serenity.takeScreenshot();
+
         WebElement iframe = getDriver().findElement(By.id("iframe"));
         getDriver().switchTo().frame(iframe);
         waitABit(500);
         WebElement continuar = getDriver().findElement(By.name("ActivacionesForm:btnContinuarActivacionVenta"));
         continuar.click();
+
+        takeScreenShot(10);
     }
 
     public  void demographicInformation(){
+        getDistrict().waitUntilPresent();
+        getDistrict().waitUntilEnabled();
         enter("Salazar londonio").into(getDistrict());
         getDropdownDeparment().click();
         getDeparment().click();
@@ -78,6 +103,9 @@ public class ControlActivationActions extends ControlActivationPage {
         getYear().click();
         getDateOk().click();
         getDay().click();
+
+        takeScreenShot(10);
+
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
         getElectronicBill().click();
@@ -87,6 +115,18 @@ public class ControlActivationActions extends ControlActivationPage {
         getConfirm().click();
         waitABit(5000);
         getActivationDetails().waitUntilPresent();
+
+        WebElement codigo = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr"));
+        WebElement descripcion = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr[2]"));
+        String cod = codigo.getText();
+        String desc = descripcion.getText();
+
+        System.out.println("*****************************************************Codigo y Descripcion***********************************************************************************");
+        System.out.println("\n\n"+cod+"\n"+desc+"\n\n");
+        System.out.println("*****************************************************************************************************************************************");
+
+        takeScreenShot(10);
+
         WebElement title = getDriver().findElement(By.className("tituloPagina"));
         MatcherAssert.assertThat("La activacion fue exitosa",title.getText(), Matchers.equalTo("ACTIVACION EXITOSA"));
     }
@@ -104,6 +144,8 @@ public class ControlActivationActions extends ControlActivationPage {
         getSearchButton().click();
         getGeneralCustomerInformation().waitUntilPresent();
         WebElement plan = getDriver().findElement(By.id("j_id135:j_id161"));
+
+        takeScreenShot(10);
 
         MatcherAssert.assertThat("el plan es pospago",
                 plan.getText(),Matchers.containsString("Pospago 5.") );

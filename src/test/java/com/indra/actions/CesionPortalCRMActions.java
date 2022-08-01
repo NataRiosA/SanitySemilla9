@@ -3,6 +3,7 @@ package com.indra.actions;
 import com.indra.models.DataExcelModels;
 import com.indra.pages.CesionPortalCRMPage;
 import com.jcraft.jsch.JSchException;
+import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -16,6 +17,13 @@ public class CesionPortalCRMActions extends CesionPortalCRMPage {
     DataExcelModels excelModels = new DataExcelModels();
     ReadFileCSV readFileCSV = new ReadFileCSV();
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        switchToIframe();
+    }
+
     public void initialRute(){
         postSaleClick();
         transactionClick();
@@ -27,10 +35,16 @@ public class CesionPortalCRMActions extends CesionPortalCRMPage {
         switchToIframe();
         writePhoneNumber(phonenumber);
         waitABit(2000);
+
+        getClaveAsesor().waitUntilEnabled();
+        getClaveAsesor().waitUntilClickable();
         getClaveAsesor().click();
+
         getVendedor().waitUntilPresent();
         selectAnnualRenewal();
         writeNewClientNumber(idClient);
+
+        takeScreenShot(10);
 
         adviserKeyGeneration();
         waitABit(1000);
@@ -41,6 +55,9 @@ public class CesionPortalCRMActions extends CesionPortalCRMPage {
         writeVendorNumber();
         writeReasonForChange();
         writeObsevations();
+
+        takeScreenShot(10);
+
         selectBillingDepartment();
         selectBillingCity();
         addressBillingClick();
@@ -51,11 +68,17 @@ public class CesionPortalCRMActions extends CesionPortalCRMPage {
         bntAceptClick();
         writeEmail();
         selectPlan();
+
+        takeScreenShot(10);
+
         btnChangeContractClick();
         alertAcept();
 
         waitABit(20000);
+        getMensajes().waitUntilVisible();
         getMensajes().waitUntilPresent();
+
+        takeScreenShot(500);
 
         System.out.println(getMensajes().getText());
 

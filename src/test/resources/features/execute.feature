@@ -29,25 +29,25 @@ Feature: Sanity limpieza y aprovisionamiento de recursos
     Then Se deberia ver en pantalla unica la linea activa en prepago
 
   @portalNintendo
-  Scenario: se requiere realizar una activacion de una linea en control
+  Scenario: se requiere realizar una activacion de una linea en control nintendo
     Given Se ingresa al portal CRM para activacion
     When Se hace activacion de una linea nintendo
     Then Se deberia ver en pantalla unica la linea activa nintendo
 
   @portalCesionPreAPos
-  Scenario: se requiere realizar una activacion de una linea en prepago
+  Scenario: se requiere realizar una cesion de contrato pre a pos
     Given Se ingresa al portal CRM para activacion
     When Se hace la cesion de contrato de una linea pre a pos
     Then Se deberia ver en pantalla unica la linea cedida pre
 
   @portalCesionPosAPre
-  Scenario: se requiere realizar una activacion de una linea en prepago
+  Scenario: se requiere realizar una cesion de contrato pos a pre
     Given Se ingresa al portal CRM para activacion
     When Se hace la cesion de contrato de una linea pos a pre
     Then Se deberia ver en pantalla unica la linea cedida pos
 
   @portalAvanger
-  Scenario: se requiere realizar una activacion de una linea en control
+  Scenario: se requiere realizar una activacion de una linea en control avenger
     Given Se ingresa al portal CRM para activacion
     When Se hace activacion de una linea avanger
     Then Se deberia ver en pantalla unica la linea activa avanger
@@ -88,24 +88,24 @@ Feature: Sanity limpieza y aprovisionamiento de recursos
     When Se hace activacion de una linea nintendo con nit
     Then Se deberia ver en pantalla unica la linea activa nintendo con nit
 
-#  @PosPayPortability
-#  Scenario: se requiere realizar una portabilidad pospago
-#    Given Se ingresa al portal CRM para activacion
-#    When se hace la solicitud de portabilidad
-#    And se realiza la activacion de la linea a portar
-#    And Se deberia ver en pantalla unica la linea en estado activado
-#    And se ejecutan los procedimientos preventana
-#    And se crea la ventana de portacion en SoapUi
-#    And se realiza la ejecucion de la shell de portacion
-#    Then Se deberia ver en pantalla unica la linea en estado activado la linea portada
-#
-#  @PrepayPortability
-#  Scenario: se requiere realizar la reconexion de una linea
-#    Given Se ingresa al portal CRM para activacion
-#    When se hace la solicitud de portabilidad prepago
-#    And se realiza la activacion de la linea portada
-#    Then Se deberia ver en pantalla unica la linea prepago en estado activado
-#    And se ejecutan los procedimientos preventana prepago
-#    And se crea la ventana de portacion en SoapUi prepago
-#    And se realiza la ejecucion de la shell de portacion
-#    Then Se deberia ver en pantalla unica la linea en estado activado la linea prepago portada
+  @PosPayPortability
+  Scenario: se requiere realizar una portabilidad pospago
+    Given Se ingresa al portal CRM para activacion
+    When se hace la solicitud de portabilidad
+    And se realiza la activacion de la linea a portar
+    And Se deberia ver en pantalla unica la linea en estado activado
+    And se ejecutan los procedimientos preventana
+    And se crea la ventana de portacion en SoapUi
+    And se realiza la ejecucion de la shell de portacion
+    Then Se deberia ver en pantalla unica la linea en estado activado la linea portada
+
+  @PrepayPortability
+  Scenario: se requiere realizar la reconexion de una linea
+    Given Se ingresa al portal CRM para activacion
+    When se hace la solicitud de portabilidad prepago
+    And se realiza la activacion de la linea portada
+    Then Se deberia ver en pantalla unica la linea prepago en estado activado
+    And se ejecutan los procedimientos preventana prepago
+    And se crea la ventana de portacion en SoapUi prepago
+    And se realiza la ejecucion de la shell de portacion
+    Then Se deberia ver en pantalla unica la linea en estado activado la linea prepago portada

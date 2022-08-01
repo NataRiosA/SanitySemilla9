@@ -53,6 +53,8 @@ public class InventoryAllocationActions extends InventoryAllocationPage {
     }
 
     public void click_addProducts(){
+        getBtnAgregarProductos().waitUntilEnabled();
+        getBtnAgregarProductos().waitUntilClickable();
         getBtnAgregarProductos().click();
     }
 

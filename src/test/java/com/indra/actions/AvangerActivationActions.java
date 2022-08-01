@@ -1,6 +1,7 @@
 package com.indra.actions;
 
 import com.indra.pages.ControlActivationPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -14,6 +15,14 @@ public class AvangerActivationActions extends ControlActivationPage {
         super(driver);
     }
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
+    }
+
     public void initialRute(){
         getSale().click();
         getDropdownActivation().click();
@@ -24,6 +33,8 @@ public class AvangerActivationActions extends ControlActivationPage {
         getDropdownActivator().waitUntilVisible();
         getDropdownActivator().click();
         getControl().click();
+
+        takeScreenShot(10);
     }
 
     public void customerInformation(String vendedor,String cliente)  {
@@ -34,6 +45,9 @@ public class AvangerActivationActions extends ControlActivationPage {
         //enter("667299000").into(getDocumentCC());
         enter(cliente).into(getDocumentCC());
         enter("2000").into(getDocumentExpedicion());
+
+        takeScreenShot(10);
+
         getBtnContinue().click();
     }
 
@@ -52,11 +66,16 @@ public class AvangerActivationActions extends ControlActivationPage {
         getDriver().switchTo().defaultContent();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
+
+        Serenity.takeScreenshot();
+
         WebElement iframe = getDriver().findElement(By.id("iframe"));
         getDriver().switchTo().frame(iframe);
         waitABit(500);
         WebElement continuar = getDriver().findElement(By.name("ActivacionesForm:btnContinuarActivacionVenta"));
         continuar.click();
+
+        takeScreenShot(10);
     }
 
     public  void demographicInformation(){
@@ -76,6 +95,9 @@ public class AvangerActivationActions extends ControlActivationPage {
         getYear().click();
         getDateOk().click();
         getDay().click();
+
+        takeScreenShot(10);
+
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
         getElectronicBill().click();
@@ -84,6 +106,18 @@ public class AvangerActivationActions extends ControlActivationPage {
         waitABit(2000);
         getConfirm().click();
         getActivationDetails().waitUntilPresent();
+
+        WebElement codigo = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr"));
+        WebElement descripcion = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr[2]"));
+        String cod = codigo.getText();
+        String desc = descripcion.getText();
+
+        System.out.println("*****************************************************Codigo y Descripcion***********************************************************************************");
+        System.out.println("\n\n"+cod+"\n"+desc+"\n\n");
+        System.out.println("*****************************************************************************************************************************************");
+
+        takeScreenShot(10);
+
         WebElement title = getDriver().findElement(By.className("tituloPagina"));
         MatcherAssert.assertThat("La activacion fue exitosa",title.getText(), Matchers.equalTo("ACTIVACION EXITOSA"));
     }
@@ -100,6 +134,8 @@ public class AvangerActivationActions extends ControlActivationPage {
         getSearchButton().click();
         getGeneralCustomerInformation().waitUntilPresent();
         WebElement plan = getDriver().findElement(By.id("j_id135:j_id161"));
+
+        takeScreenShot(10);
 
         MatcherAssert.assertThat("el plan es pospago",
                 plan.getText(),Matchers.containsString("Pospago ") );

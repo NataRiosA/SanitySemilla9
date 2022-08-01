@@ -1,6 +1,7 @@
 package com.indra.actions;
 
 import com.indra.pages.ControlActivationPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -14,6 +15,14 @@ public class ControlActivationNitActions extends ControlActivationPage {
         super(driver);
     }
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
+    }
+
     public void initialRute(){
         getSale().click();
         getDropdownActivation().click();
@@ -24,6 +33,9 @@ public class ControlActivationNitActions extends ControlActivationPage {
         getDropdownActivator().waitUntilVisible();
         getDropdownActivator().click();
         getControl().click();
+
+        takeScreenShot(10);
+
     }
 
     public void customerInformation(String vendedor,String cliente)  {
@@ -35,6 +47,9 @@ public class ControlActivationNitActions extends ControlActivationPage {
         //enter("667299000").into(getDocumentCC());
         enter(cliente).into(getDocumentCC());
         //enter("2000").into(getDocumentExpedicion());
+
+        takeScreenShot(10);
+
         getBtnContinue().click();
     }
 
@@ -53,10 +68,16 @@ public class ControlActivationNitActions extends ControlActivationPage {
         getDriver().switchTo().defaultContent();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
+
+        Serenity.takeScreenshot();
+
         WebElement iframe = getDriver().findElement(By.id("iframe"));
         getDriver().switchTo().frame(iframe);
         waitABit(500);
         WebElement continuar = getDriver().findElement(By.name("ActivacionesForm:btnContinuarActivacionVenta"));
+
+        takeScreenShot(10);
+
         continuar.click();
     }
 
@@ -77,6 +98,10 @@ public class ControlActivationNitActions extends ControlActivationPage {
         getYear().click();
         getDateOk().click();
         getDay().click();
+
+        takeScreenShot(10);
+
+
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
         enter("2000").into(getExpedicion());
@@ -97,6 +122,8 @@ public class ControlActivationNitActions extends ControlActivationPage {
         System.out.println("\n\n"+cod+"\n"+desc+"\n\n");
         System.out.println("*****************************************************************************************************************************************");
 
+        takeScreenShot(10);
+
 
         WebElement title = getDriver().findElement(By.className("tituloPagina"));
         MatcherAssert.assertThat("La activacion fue exitosa",title.getText(), Matchers.equalTo("ACTIVACION EXITOSA"));
@@ -114,6 +141,8 @@ public class ControlActivationNitActions extends ControlActivationPage {
         getSearchButton().click();
         getGeneralCustomerInformation().waitUntilPresent();
         WebElement plan = getDriver().findElement(By.id("j_id135:j_id161"));
+
+        takeScreenShot(10);
 
         MatcherAssert.assertThat("el plan es pospago",
                 plan.getText(),Matchers.containsString("Pospago 5.") );

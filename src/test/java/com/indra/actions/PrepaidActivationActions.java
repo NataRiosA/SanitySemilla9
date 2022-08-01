@@ -2,6 +2,7 @@ package com.indra.actions;
 
 import com.indra.models.DataExcelModels;
 import com.indra.pages.PrepaidActivationPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -15,6 +16,14 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         super(driver);
     }
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
+    }
+
     public void initialRute(){
         getSale().click();
         getUnfold().click();
@@ -24,6 +33,9 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         getDriver().switchTo().frame(iframe);
         getPaymentActivator().click();
         getPrepaid().click();
+
+        takeScreenShot(10);
+
     }
 
     public void customerInformation(String vendedor,String cliente)  {
@@ -34,6 +46,9 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         //enter("667299000").into(getDocumentCC());
         enter(cliente).into(getDocumentCC());
         enter("2000").into(getDocumentExpedicion());
+
+        takeScreenShot(20);
+
         getBtnContinue().click();
     }
 
@@ -49,11 +64,16 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         getDriver().switchTo().defaultContent();
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,420)"); //Scroll vertically down by 1000 pixels
+
+        Serenity.takeScreenshot();
+
         WebElement iframe = getDriver().findElement(By.id("iframe"));
         getDriver().switchTo().frame(iframe);
         WebElement continuar = getDriver().findElement(By.name("ActivacionesForm:btnContinuarActivacionVenta"));
         continuar.click();
         getContinueTarife().click();
+
+        takeScreenShot(10);
     }
 
     public  void demographicInformation(){
@@ -67,6 +87,17 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         getConfirm().click();
         waitABit(10000);
         getActivationDetails().waitUntilPresent();
+
+        WebElement codigo = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr"));
+        WebElement descripcion = getDriver().findElement(By.xpath("//div[@id='errorForm:linkPanel:content']/table/tbody/tr[2]"));
+        String cod = codigo.getText();
+        String desc = descripcion.getText();
+
+        System.out.println("*****************************************************Codigo y Descripcion***********************************************************************************");
+        System.out.println("\n\n"+cod+"\n"+desc+"\n\n");
+        System.out.println("*****************************************************************************************************************************************");
+
+        takeScreenShot(10);
 
         WebElement title = getDriver().findElement(By.className("tituloPagina"));
         MatcherAssert.assertThat("La activacion fue exitosa",title.getText(), Matchers.equalTo("ACTIVACION EXITOSA"));
@@ -86,6 +117,8 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         getGeneralCustomerInformation().waitUntilPresent();
         WebElement plan = getDriver().findElement(By.id("j_id135:j_id161"));
 
+        takeScreenShot(10);
+
         MatcherAssert.assertThat("el plan es prepago",
                 plan.getText(),Matchers.containsString("Plan Tigo Prepago") );
     }
@@ -102,6 +135,8 @@ public class PrepaidActivationActions extends PrepaidActivationPage {
         getSearchButton().click();
         getGeneralCustomerInformation().waitUntilPresent();
         WebElement plan = getDriver().findElement(By.id("j_id135:j_id161"));
+
+        takeScreenShot(10);
 
         MatcherAssert.assertThat("el plan es Postpago",
                 plan.getText(),Matchers.containsString("Pospago 5.") );

@@ -1,6 +1,7 @@
 package com.indra.actions;
 
 import com.indra.pages.PagoEquiposPage;
+import net.serenitybdd.core.Serenity;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.*;
@@ -12,6 +13,12 @@ public class PagoEquiposActions extends PagoEquiposPage {
         super(driver);
     }
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        switchToFrame();
+    }
 
 
     public void rutaInicial(){
@@ -35,6 +42,8 @@ public class PagoEquiposActions extends PagoEquiposPage {
         WebElement toque = getDriver().findElement(By.xpath("/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div/div/div/div/div/div[1]/div[3]/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div/div/div/table/tbody/tr/td[1]/form/div/div/div/div/div[2]"));
         toque.click();
         switchToFrame();
+
+        takeScreenShot(10);
 
         getTextoTelefono().waitUntilVisible();
         if(getTextoTelefono().getText().equals(numeroCelular)) {
@@ -61,6 +70,8 @@ public class PagoEquiposActions extends PagoEquiposPage {
             System.out.println("***********************************************************************************");
             System.out.println(getMessages().getText());
             System.out.println("***********************************************************************************");
+
+            takeScreenShot(10);
 
             MatcherAssert.assertThat("la factura se paga de manera correcta"
                     , getMessages().getText()
@@ -111,11 +122,13 @@ public class PagoEquiposActions extends PagoEquiposPage {
     public void ingresarValorEquipo(){
         String valor = getValorAPagar().getValue();
         getValorRecibido().clear();
-        waitABit(200);
+        waitABit(500);
         enter(valor, Keys.TAB).into(getValorRecibido());
     }
 
     public void clickBotonPagar(){
+        getBtnPagar().waitUntilEnabled();
+        getBtnPagar().waitUntilClickable();
         getBtnPagar().click();
     }
 

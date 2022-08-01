@@ -3,6 +3,7 @@ package com.indra.actions;
 import com.indra.models.DataExcelModels;
 import com.indra.pages.CambioPrePosPage;
 import com.jcraft.jsch.JSchException;
+import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,6 +18,14 @@ public class CambioPrePosActions extends CambioPrePosPage {
     DataExcelModels excelModels = new DataExcelModels();
     ReadFileCSV readFileCSV = new ReadFileCSV();
 
+    public void takeScreenShot(int wait){
+        waitABit(wait);
+        getDriver().switchTo().defaultContent();
+        Serenity.takeScreenshot();
+        WebElement iframe = getDriver().findElement(By.id("iframe"));
+        getDriver().switchTo().frame(iframe);
+    }
+
     public void initialRute(){
         postSaleClick();
         transactionClick();
@@ -27,7 +36,7 @@ public class CambioPrePosActions extends CambioPrePosPage {
     public void executeContractAssignment(String phonenumber, String vendor) throws InterruptedException, AWTException, JSchException {
         switchToIframe();
         writePhoneNumber(phonenumber);
-        waitABit(70000);
+        waitABit(90000);
         System.out.println("ya pasaron 50 sg");
         getBtnClave().click();
         adviserKeyGeneration();
@@ -47,6 +56,9 @@ public class CambioPrePosActions extends CambioPrePosPage {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,820)");
         selectPlan();
+
+        takeScreenShot(10);
+
         waitABit(3000);
         js.executeScript("window.scrollBy(0,320)");
         renovar();
@@ -56,6 +68,12 @@ public class CambioPrePosActions extends CambioPrePosPage {
         alertAcept();
         waitABit(10000);
         getMensajes().waitUntilPresent();
+
+        takeScreenShot(500);
+
+        WebElement msgs = getDriver().findElement(By.xpath("//form[@id='PlanschangeForm']//table"));
+        System.out.println(msgs.getText());
+
         System.out.println(getMensajes().getText());
     }
 
